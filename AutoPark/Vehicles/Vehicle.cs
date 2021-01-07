@@ -21,7 +21,7 @@ namespace AutoPark.Vehicles
         /// <summary>
         /// Volume in liters or kilowatts
         /// </summary>
-        public double VolumeOfTheTank { get; set; }
+        public double VolumeOfTank { get; set; }
         public const decimal WeightTaxCoefficient = 0.0013m;
         public decimal TaxPerMonth => Weight * WeightTaxCoefficient + VehicleType.TaxCoefficient * 30 + 5;
 
