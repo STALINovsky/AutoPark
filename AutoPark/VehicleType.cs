@@ -19,6 +19,6 @@ namespace AutoPark
         }
 
         public void Display() => Console.WriteLine(ToString());
-        public override string ToString() => $"Type name: {TypeName}, Tax coefficient: {TaxCoefficient}";
+        public override string ToString() => $"{TypeName}, {TaxCoefficient}";
     }
 }
