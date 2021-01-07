@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AutoPark
+namespace AutoPark.Vehicles
 {
     public class VehicleType
     {

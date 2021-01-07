@@ -12,7 +12,5 @@ namespace AutoPark
                 Console.WriteLine(item);
             }
         }
-
-
     }
 }
