@@ -9,7 +9,7 @@ namespace AutoPark.Vehicles
 
         public VehicleType()
         {
-            
+
         }
 
         public VehicleType(string typeName, decimal taxCoefficient)
