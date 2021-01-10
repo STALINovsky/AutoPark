@@ -21,7 +21,7 @@ namespace AutoPark.Controllers
         {
             OutputService.PrintVehicleTable(vehicles);
             //select same vehicles 
-            var sameElements = vehicles.GroupBy(x => x)
+            var sameElements = vehicles.GroupBy(item => item)
                 .Where(g => g.Count() > 1)
                 .Select(y => new { Value = y.Key, Count = y.Count() });
 
