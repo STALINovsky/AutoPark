@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using AutoPark.Extensions;
 using AutoPark.Model;
 using AutoPark.Model.Vehicles;
 using AutoPark.Services;
-using Microsoft.VisualBasic;
 
-namespace AutoPark.Collections
+namespace AutoPark.Data
 {
-    public class VehicleCollection
+    /// <summary>
+    /// Collection for working with data in csv format
+    /// </summary>
+    public class VehicleContext
     {
         private readonly List<Vehicle> vehicles;
         private readonly List<VehicleType> vehicleTypes;
@@ -28,7 +26,7 @@ namespace AutoPark.Collections
                                       vehicles.Sum(vehicle => vehicle.TaxPerMonth)
                                       + rents.Sum(rent => rent.RentPrice);
 
-        public VehicleCollection(string vehiclesFilePath, string vehicleTypesFilePath, string rentsFilePath)
+        public VehicleContext(string vehiclesFilePath, string vehicleTypesFilePath, string rentsFilePath)
         {
             vehicleTypes = LoadVehicleTypes(vehicleTypesFilePath);
             rents = LoadRents(rentsFilePath);
@@ -93,7 +91,7 @@ namespace AutoPark.Collections
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public int Delete(int index)
+        public int DeleteByIndex(int index)
         {
             if (vehicles.IsIndexValid(index))
             {
