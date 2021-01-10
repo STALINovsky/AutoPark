@@ -1,4 +1,4 @@
-﻿namespace AutoPark.Vehicles.Engines
+﻿namespace AutoPark.Model.Vehicles.Engines
 {
     public abstract class CombustionAbstractEngine : AbstractEngine
     {
@@ -11,7 +11,7 @@
         /// </summary>
         /// <param name="fuelTankVolume">tank volume in liters</param>
         /// <returns>kilometers</returns>
-        public override double MaxDrivingRange(double fuelTankVolume) => fuelTankVolume * 100 / FuelConsumptionPer100;
+        public override double MaxDrivingRange(double fuelTankVolume) => 100 * fuelTankVolume / FuelConsumptionPer100;
 
         /// <summary>
         /// Fuel consumption per 100 kilometers in liters  

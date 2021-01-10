@@ -1,4 +1,4 @@
-﻿namespace AutoPark.Vehicles.Engines
+﻿namespace AutoPark.Model.Vehicles.Engines
 {
     public abstract class AbstractEngine
     {

@@ -1,47 +1,60 @@
 ﻿using System;
-using AutoPark.Vehicles.Engines;
+using System.Collections.Generic;
+using System.Linq;
+using AutoPark.Model.Vehicles.Engines;
 
-namespace AutoPark.Vehicles
+namespace AutoPark.Model.Vehicles
 {
     public class Vehicle : IComparable<Vehicle>, IEquatable<Vehicle>
     {
-
-        public VehicleType VehicleType { get; }
-        public string ModelName { get; }
-        public string RegistrationNumber { get; }
+        public int Id { get; init; }
+        public VehicleType VehicleType { get; init; }
+        public string ModelName { get; init; }
+        public string RegistrationNumber { get; init; }
         /// <summary>
         /// Weight in KG
         /// </summary>
-        public int Weight { get; }
-        public int ManufactureYear { get; }
+        public int Weight { get; init; }
+        public int ManufactureYear { get; init; }
         /// <summary>
         /// Mileage in kilometers 
         /// </summary>
-        public int Mileage { get; set; }
-        public CarColor Color { get; set; }
+        public int Mileage { get; init; }
+        public CarColor Color { get; init; }
         /// <summary>
         /// Volume in liters or kilowatts
         /// </summary>
-        public double VolumeOfTank { get; set; }
-        public AbstractEngine AbstractEngine { get; set; }
+        public double VolumeOfTank { get; init; }
+        public AbstractEngine AbstractEngine { get; init; }
+        public List<Rent> Rents { get; set; }
 
-        public const decimal WeightTaxCoefficient = 0.0013m;
-        public decimal TaxPerMonth => Weight * WeightTaxCoefficient + VehicleType.TaxCoefficient * AbstractEngine.TaxCoefficient * 30 + 5;
-
-        public double MaxDrivingRange => AbstractEngine.MaxDrivingRange(VolumeOfTank);
-
-        public Vehicle(VehicleType vehicleType, AbstractEngine engine, 
-            string modelName, string registrationNumber, int weight, int manufactureYear, int mileage, CarColor color)
+        public Vehicle()
         {
+            
+        }
+
+        public Vehicle(int id, VehicleType vehicleType, AbstractEngine engine, double volumeOfTank,
+            string modelName, string registrationNumber, int weight, int manufactureYear, int mileage, CarColor color, List<Rent> rents)
+        {
+            Id = id;
             VehicleType = vehicleType;
             AbstractEngine = engine;
+            VolumeOfTank = volumeOfTank;
             ModelName = modelName;
             RegistrationNumber = registrationNumber;
             Weight = weight;
             ManufactureYear = manufactureYear;
             Mileage = mileage;
             Color = color;
+            Rents = rents;
         }
+
+        public const decimal WeightTaxCoefficient = 0.0013m;
+        public decimal TaxPerMonth => Weight * WeightTaxCoefficient + VehicleType.TaxCoefficient * AbstractEngine.TaxCoefficient * 30 + 5;
+
+        public double MaxDrivingRange => AbstractEngine.MaxDrivingRange(VolumeOfTank);
+        public decimal TotalIncome => Rents.Sum(rent => rent.RentPrice);
+        public decimal TotalProfit => TotalIncome - TaxPerMonth;
 
         public override string ToString() =>
             $"{VehicleType}, {ModelName}, {RegistrationNumber}, {Weight}, {ManufactureYear}, {Mileage}, {Color}";

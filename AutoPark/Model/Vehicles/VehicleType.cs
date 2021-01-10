@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace AutoPark.Vehicles
+namespace AutoPark.Model.Vehicles
 {
     public class VehicleType
     {
+        public int Id { get; set; }
         public string TypeName { get; set; }
         public decimal TaxCoefficient { get; set; }
 
@@ -12,8 +13,9 @@ namespace AutoPark.Vehicles
 
         }
 
-        public VehicleType(string typeName, decimal taxCoefficient)
+        public VehicleType(int id, string typeName, decimal taxCoefficient)
         {
+            Id = id;
             TypeName = typeName;
             TaxCoefficient = taxCoefficient;
         }

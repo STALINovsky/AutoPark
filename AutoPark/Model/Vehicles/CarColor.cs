@@ -1,4 +1,4 @@
-﻿namespace AutoPark.Vehicles
+﻿namespace AutoPark.Model.Vehicles
 {
     public enum CarColor
     {

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AutoPark.Vehicles.Engines
+﻿namespace AutoPark.Model.Vehicles.Engines
 {
     class ElectricalEngine : AbstractEngine
     {
-        public ElectricalEngine(double electricConsumption, double engineCapacity) : base("Electrical", 0.1m)
+        public ElectricalEngine(double electricConsumption, double engineCapacity) :
+            base(EngineTypesNamesConstant.ElectricalEngine, 0.1m)
         {
             ElectricConsumption = electricConsumption;
             EngineCapacity = engineCapacity;
