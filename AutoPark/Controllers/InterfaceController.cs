@@ -14,21 +14,16 @@ namespace AutoPark.Controllers
     /// </summary>
     class InterfaceController : IController
     {
-        private readonly List<Vehicle> vehicles;
+        private IEnumerable<Vehicle> vehicles;
 
-        public InterfaceController(List<Vehicle> vehicles)
+        public InterfaceController(IEnumerable<Vehicle> vehicles)
         {
             this.vehicles = vehicles;
         }
 
-        private (Vehicle Min, Vehicle Max) FindVehiclesWithMinAndMaxMileage()
-        {
-            //selecting vehicles  min and max mileage 
-            var vehicleWithLowestMileage = vehicles.SelectMin(vehicle => vehicle.Mileage);
-            var vehicleWithHighestMileage = vehicles.SelectMax(vehicle => vehicle.Mileage);
+        private Vehicle FindVehiclesWithMinMileage() => vehicles.SelectMin(vehicle => vehicle.Mileage);
 
-            return (vehicleWithLowestMileage, vehicleWithHighestMileage);
-        }
+        private Vehicle FindVehiclesWithMaxMileage() => vehicles.SelectMax(vehicle => vehicle.Mileage);
 
         private void SortVehicles()
         {
@@ -37,7 +32,7 @@ namespace AutoPark.Controllers
             OutputService.PrintVehicleTable(vehicles);
 
             //sorting vehicles
-            vehicles.Sort();
+            vehicles = vehicles.OrderBy(item => item);
 
             //show sorted collection to console
             Console.WriteLine("Sorted collection:");
@@ -48,8 +43,7 @@ namespace AutoPark.Controllers
         {
             SortVehicles();
 
-            var minAndMax = FindVehiclesWithMinAndMaxMileage();
-            Console.WriteLine($"Vehicle with min mileage: {minAndMax.Min}, Vehicle with max mileage: {minAndMax.Max}");
+            Console.WriteLine($"Vehicle with min mileage: {FindVehiclesWithMinMileage()}, Vehicle with max mileage: {FindVehiclesWithMaxMileage()}");
         }
     }
 }
