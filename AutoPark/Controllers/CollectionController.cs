@@ -17,7 +17,7 @@ namespace AutoPark.Controllers
         const string VEHICLE_PATH = @"Data\vehicles.csv";
         const string VEHICLE_TYPES_PATH = @"Data\types.csv";
         const string RENTS_PATH = @"Data\rents.csv";
-        private readonly VehicleContext vehicleContext = new VehicleContext(VEHICLE_PATH, VEHICLE_TYPES_PATH, RENTS_PATH);
+        private readonly VehicleContext vehicleContext = new(VEHICLE_PATH, VEHICLE_TYPES_PATH, RENTS_PATH);
 
         public void AppendNewVehicle()
         {
@@ -26,8 +26,8 @@ namespace AutoPark.Controllers
             var typeOfNewElement = vehicleContext.VehicleTypes[3];
 
             //append item to vehicle collection -1 = AppEnd
-            vehicleContext.Insert(-1, new( indexOfNewElement, typeOfNewElement,
-                new DieselEngine(4.75, 20.1, 135),60,
+            vehicleContext.Insert(-1, new(indexOfNewElement, typeOfNewElement,
+                new DieselEngine(4.75, 20.1, 135), 60,
                 "МТЗ Беларус-1025.4", "1145 AB-7", 1200, 2020, 109, CarColor.Blue, new List<Rent>()));
         }
 
@@ -36,13 +36,12 @@ namespace AutoPark.Controllers
             vehicleContext.PrintVehicles();
 
             AppendNewVehicle();
-
             vehicleContext.DeleteByIndex(1);
             vehicleContext.DeleteByIndex(4);
 
-            vehicleContext.PrintVehicles();
-
             vehicleContext.SortVehicle();
+            Console.WriteLine("Vehicles after manipulation: ");
+            vehicleContext.PrintVehicles();
         }
     }
 }
