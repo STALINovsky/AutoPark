@@ -68,6 +68,7 @@ namespace AutoPark.Extensions
         public static TSource SelectMax<TSource, TCompare>(this IEnumerable<TSource> source, Func<TSource, TCompare> selector)
             where TCompare : IComparable<TCompare>
         {
+            //delegate to SelectItemBy and define comparer as searchedItem < candidate
             return SelectItemBy(source, selector, (searchedItem, candidate) => searchedItem.CompareTo(candidate) < 0);
         }
 
